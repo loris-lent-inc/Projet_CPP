@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace IHM
 {
@@ -16,12 +17,13 @@ namespace IHM
         double moyenne = 0, mediane = 0, currentScore = 0;
         bool run = false;
         List<Image> images;
-        
+        List<Image> imagesTraitees;
+        int position = 0;
+       
 
         public Form1()
         {
             InitializeComponent();
-
         }
 
         public List<Image> LoadBmpImages()
@@ -46,6 +48,14 @@ namespace IHM
             return images;
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+            run = true;
+            //Thread t1 = new Thread(traitement);
+            //t1.Start();
+            traitement();
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -55,8 +65,48 @@ namespace IHM
                 return;
             }
             button2.Enabled = true;
-            button3.Enabled = true;
-            button4.Enabled = true;
+            pictureBoxPRE.Image = images[0];
+            labelNumero.Text =  "1/" + images.Count;
+        }
+
+        private void traitement()
+        {
+            PictureBox[] pictureBoxes = new PictureBox[]
+            {
+                pictureBoxPRE1, pictureBoxPRE2, pictureBoxPRE3, pictureBoxPRE4, pictureBoxPRE5, pictureBoxPRE6, pictureBoxPRE7, pictureBoxPRE8, pictureBoxPRE9, pictureBoxPRE10
+
+            };
+
+            while(run)
+            {
+                goToNext(pictureBoxes);
+                Application.DoEvents();
+                Thread.Sleep(100);
+               // MessageBox.Show("OK");
+                
+            }
+        }
+        private void goToNext(PictureBox[] pictureBoxes)
+        {
+            for (int i = pictureBoxes.Length - 1; i > 0; i--)
+            {
+                if (pictureBoxes[i - 1].Image != null)
+                {
+                    pictureBoxes[i].Image = pictureBoxes[i - 1].Image;
+                }
+
+            }
+            pictureBoxes[0].Image = pictureBoxPRE.Image;
+
+            position++;
+            if (position == images.Count)
+            {
+                run = false;
+                return;
+            }
+            labelNumero.Text = (position + 1) + "/" + images.Count;
+
+            pictureBoxPRE.Image = images[position];
         }
     }
 }
