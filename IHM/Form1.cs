@@ -9,7 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using libImage;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
+//using static System.Net.Mime.MediaTypeNames;
 
 namespace IHM
 {
@@ -72,7 +76,13 @@ namespace IHM
 
         private void button1_Click(object sender, EventArgs e)
         {
-            images = LoadBmpImages();
+            //images = LoadBmpImages();
+            Bitmap BMP = new Bitmap("C:\\Users\\loris\\Downloads\\images projet\\Source Images - bmp\\Test.bmp");
+            images = new List<Image>();
+            images.Add(BMP);
+            images.Add(BMP);
+            images.Add(BMP);
+            images.Add(BMP);
             loadFirst();
             processState(State.READY);
         }
@@ -113,14 +123,15 @@ namespace IHM
 
             };
 
-            while(currentState == State.RUN)
+            while (currentState == State.RUN)
             {
                 goToNext(pictureBoxes);
                 Application.DoEvents();
                 Thread.Sleep(100);
-               // MessageBox.Show("OK");
-                
+                // MessageBox.Show("OK");
+
             }
+
         }
         private void goToNext(PictureBox[] pictureBoxes)
         {
@@ -143,7 +154,21 @@ namespace IHM
             }
             labelNumero.Text = (position + 1) + "/" + images.Count;
 
-            pictureBoxPRE.Image = images[position];
+            Image old = pictureBoxPRE.Image = images[position];
+
+            Bitmap BMP = new Bitmap("C:\\Users\\loris\\Downloads\\images projet\\Source Images - bmp\\Test.bmp");
+
+
+            ClImage Img = new ClImage();
+            unsafe
+            {
+                BitmapData bmpData = BMP.LockBits(new Rectangle(0, 0, BMP.Width, BMP.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+                Img.objetLibDataImgPtr(1, bmpData.Scan0, bmpData.Stride, BMP.Height, BMP.Width);
+                // 1 champ texte retour C++, le seuil auto
+                BMP.UnlockBits(bmpData);
+            }
+
+            pictureBoxPOST.Image = BMP;
         }
 
 
