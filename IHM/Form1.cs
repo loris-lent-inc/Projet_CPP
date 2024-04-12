@@ -19,7 +19,8 @@ namespace IHM
         List<Image> images;
         List<Image> imagesTraitees;
         int position = 0;
-       
+
+        private Thread t1;
 
         public Form1()
         {
@@ -52,6 +53,7 @@ namespace IHM
         {
             
             run = true;
+            button3.Enabled = true;
             //Thread t1 = new Thread(traitement);
             //t1.Start();
             traitement();
@@ -67,6 +69,24 @@ namespace IHM
             button2.Enabled = true;
             pictureBoxPRE.Image = images[0];
             labelNumero.Text =  "1/" + images.Count;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // bouton qui permet d'arrêter le lancement
+            run = false;
+        }
+
+        // ou alors bouton 4 sert plutôt à sauvegarder les scores ?
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // bouton pour sauvegarder l'image (laquelle ?)
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            if(saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                
+            }
+
         }
 
         private void traitement()
@@ -108,5 +128,6 @@ namespace IHM
 
             pictureBoxPRE.Image = images[position];
         }
+
     }
 }

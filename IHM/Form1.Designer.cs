@@ -79,6 +79,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.currenttable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPRE)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPOST)).BeginInit();
@@ -655,6 +656,7 @@
             this.button3.TabIndex = 5;
             this.button3.Text = "Arrêter";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -666,6 +668,7 @@
             this.button4.TabIndex = 6;
             this.button4.Text = "Sauver";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -781,6 +784,7 @@
         private System.Windows.Forms.PictureBox pictureBoxPOST8;
         private System.Windows.Forms.PictureBox pictureBoxPOST9;
         private System.Windows.Forms.PictureBox pictureBoxPOST10;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 
