@@ -80,6 +80,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.statePanel = new System.Windows.Forms.Panel();
+            this.stateLabel = new System.Windows.Forms.Label();
             this.currenttable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPRE)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPOST)).BeginInit();
@@ -106,6 +108,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPOST10)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.statePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // currenttable
@@ -626,7 +629,7 @@
             // button1
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.Location = new System.Drawing.Point(22, 43);
+            this.button1.Location = new System.Drawing.Point(22, 120);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -638,7 +641,7 @@
             // 
             this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(22, 153);
+            this.button2.Location = new System.Drawing.Point(22, 208);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
@@ -650,7 +653,7 @@
             // 
             this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(22, 263);
+            this.button3.Location = new System.Drawing.Point(22, 296);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 5;
@@ -662,7 +665,7 @@
             // 
             this.button4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button4.Enabled = false;
-            this.button4.Location = new System.Drawing.Point(22, 374);
+            this.button4.Location = new System.Drawing.Point(22, 385);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 6;
@@ -674,19 +677,39 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.button1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button4, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.button2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button3, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.button1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.button4, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.button2, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.button3, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.statePanel, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(1114, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(120, 442);
             this.tableLayoutPanel1.TabIndex = 7;
+            // 
+            // statePanel
+            // 
+            this.statePanel.Controls.Add(this.stateLabel);
+            this.statePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statePanel.Location = new System.Drawing.Point(3, 3);
+            this.statePanel.Name = "statePanel";
+            this.statePanel.Size = new System.Drawing.Size(114, 82);
+            this.statePanel.TabIndex = 7;
+            // 
+            // stateLabel
+            // 
+            this.stateLabel.AutoSize = true;
+            this.stateLabel.Location = new System.Drawing.Point(36, 34);
+            this.stateLabel.Name = "stateLabel";
+            this.stateLabel.Size = new System.Drawing.Size(35, 13);
+            this.stateLabel.TabIndex = 0;
+            this.stateLabel.Text = "label2";
             // 
             // Form1
             // 
@@ -727,6 +750,8 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.statePanel.ResumeLayout(false);
+            this.statePanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -785,6 +810,8 @@
         private System.Windows.Forms.PictureBox pictureBoxPOST9;
         private System.Windows.Forms.PictureBox pictureBoxPOST10;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Panel statePanel;
+        private System.Windows.Forms.Label stateLabel;
     }
 }
 

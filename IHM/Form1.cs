@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace IHM
 {
@@ -20,11 +21,22 @@ namespace IHM
         List<Image> imagesTraitees;
         int position = 0;
 
+        public enum State
+        {
+            INIT,
+            READY,
+            RUN,
+            RUN_STOP
+        }
+
+        private State currentState = State.INIT;
+
         private Thread t1;
 
         public Form1()
         {
             InitializeComponent();
+            processState(State.INIT);
         }
 
         public List<Image> LoadBmpImages()
@@ -51,30 +63,34 @@ namespace IHM
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
-            run = true;
-            button3.Enabled = true;
             //Thread t1 = new Thread(traitement);
             //t1.Start();
+            processState(State.RUN);
+
             traitement();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             images = LoadBmpImages();
-            if(images.Count == 0)
+            loadFirst();
+            processState(State.READY);
+        }
+
+        private void loadFirst() { 
+            if (images.Count == 0)
             {
                 return;
             }
-            button2.Enabled = true;
-            pictureBoxPRE.Image = images[0];
-            labelNumero.Text =  "1/" + images.Count;
+            position = 0;
+            pictureBoxPRE.Image = images[position];
+            labelNumero.Text = (position + 1) + "/" + images.Count;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             // bouton qui permet d'arrêter le lancement
-            run = false;
+            processState(State.RUN_STOP);
         }
 
         // ou alors bouton 4 sert plutôt à sauvegarder les scores ?
@@ -97,7 +113,7 @@ namespace IHM
 
             };
 
-            while(run)
+            while(currentState == State.RUN)
             {
                 goToNext(pictureBoxes);
                 Application.DoEvents();
@@ -121,12 +137,54 @@ namespace IHM
             position++;
             if (position == images.Count)
             {
-                run = false;
+                processState(State.READY);
+                loadFirst();
                 return;
             }
             labelNumero.Text = (position + 1) + "/" + images.Count;
 
             pictureBoxPRE.Image = images[position];
+        }
+
+
+        private void processState(State newState)
+        {
+            currentState = newState;
+            switch (newState)
+            {
+                case State.INIT:
+                    statePanel.BackColor = Color.LightGray;
+                    stateLabel.Text = "Initialisé";
+                    button1.Enabled = true;
+                    button2.Enabled = false;
+                    button3.Enabled = false;
+                    button4.Enabled = false;
+                    break;
+                case State.READY:
+                    statePanel.BackColor = Color.LightGreen;
+                    stateLabel.Text = "Prêt";
+                    button1.Enabled = false;
+                    button2.Enabled = true;
+                    button3.Enabled = false;
+                    button4.Enabled = false;
+                    break;
+                case State.RUN:
+                    statePanel.BackColor = Color.Green;
+                    stateLabel.Text = "Lancé";
+                    button1.Enabled = false;
+                    button2.Enabled = false;
+                    button3.Enabled = true;
+                    button4.Enabled = false;
+                    break;
+                case State.RUN_STOP:
+                    statePanel.BackColor = Color.Orange;
+                    stateLabel.Text = "Pause";
+                    button1.Enabled = false;
+                    button2.Enabled = true;
+                    button3.Enabled = false;
+                    button4.Enabled = true;
+                    break;
+            }
         }
 
     }
